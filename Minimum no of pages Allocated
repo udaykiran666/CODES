@@ -1,0 +1,33 @@
+def uday(A,N,M,mid):
+    num_student=1
+    pages=0
+    for i in range(N):
+        if A[i]>mid:
+            return False
+        if (A[i]+pages)>mid:
+            num_student+=1
+            pages+=A[i]
+        else:
+            pages+=A[i]
+    if num_student>M:
+        return False
+    return True
+def kiran(A,N,M):
+    if N<M:
+        return -1
+    if N==M:
+        return max(A)
+    res=-1
+    low,high=max(A),sum(A)
+    while low<=high:
+        mid=(low+high)//2
+        if uday(A,N,M,mid):
+            res=mid
+            high=mid-1
+        else:
+            low=mid+1
+    return res
+N = 4
+A = [12,34,67,90]
+M = 2
+print(kiran(A,N,M))
